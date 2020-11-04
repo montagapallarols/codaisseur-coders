@@ -60,6 +60,8 @@ export default function PostsFeed() {
 
       {/* TODO: show a loading indicator when the posts are loading,
         or else a button to load more posts if not */}
+
+        {data.loading ? <p>Loading...</p> : <button onClick={fetchNext5Posts}>Load more posts...</button>}
     </div>
   );
 }
