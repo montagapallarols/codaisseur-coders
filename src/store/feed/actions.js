@@ -22,7 +22,7 @@ export function setLoading(loading) {
     const offset = getState().feed.posts.length;
 
     const response = await axios.get(`${API_URL}/posts?offset=${offset}&limit=5`)
-    console.log("More posts", response.data.rows)
+    // console.log("More posts", response.data.rows)
     const morePosts = response.data.rows
 
 
