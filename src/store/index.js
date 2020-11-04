@@ -8,7 +8,7 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
 
 const enhancer = compose(applyMiddleware(ReduxThunk), devTools);
 
-const store = createStore( enhancer);
-// rootReducer,
+const store = createStore(rootReducer, enhancer);
+
 
 export default store;

@@ -1,9 +1,9 @@
-// import { combineReducers } from "redux";
-// import someFeatureReducer from "./someFeature/reducer";
+import { combineReducers } from "redux";
+import feedReducer from "./feed/reducer";
 
-// const rootReducer = combineReducers({
-//   someFeature: someFeatureReducer
-//   // etc.
-// });
+const rootReducer = combineReducers({
+  feed: feedReducer
 
-// export default rootReducer;
+});
+
+export default rootReducer;

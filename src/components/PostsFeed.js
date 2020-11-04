@@ -1,46 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, postsFetched } from "../store/feed/actions";
+import { selectFeedLoading, selectFeedPosts } from "../store/feed/selectors";
+
 
 const API_URL = `https://codaisseur-coders-network.herokuapp.com`;
 
 export default function PostsFeed() {
-  const [data, setData] = useState({
-    loading: true,
-    posts: [],
-  });
+
+  const dispatch = useDispatch()
+
+  const feedLoading = useSelector(selectFeedLoading);
+  const feedPosts = useSelector(selectFeedPosts)
+ 
 
   async function fetchNext5Posts() {
-    setData({ ...data, loading: true });
+    dispatch(setLoading(true));
 
-    // TODO
-    // fetch next set of posts (use offset+limit),
-    //  and define the variable `morePosts`
-
-    const response = await axios.get(`${API_URL}/posts?offset=${data.posts.length}&limit=5`)
+    const response = await axios.get(`${API_URL}/posts?offset=${feedPosts.length}&limit=5`)
     console.log("More posts", response.data.rows)
     const morePosts = response.data.rows
 
 
-    setData({
-      loading: false,
-      posts: [...data.posts, ...morePosts],
-    });
+    dispatch(postsFetched(morePosts));
   }
 
   useEffect(() => {
     fetchNext5Posts();
   }, []);
 
-  console.log("DATA.POSTS is...", data.posts)
+  console.log("FEED POSTS.....", feedPosts)
+  dispatch(setLoading(false))
 
   return (
-    <div className="PostsFeed">
+    <div>
       <h2>Recent posts</h2>
 
-      {/* TODO: render the list of posts */}
-
-        {data.posts.map(post => {
+        {feedPosts.map(post => {
             return <div key={post.id}>
                 <h2>{post.title}</h2>
                 <p>
@@ -61,7 +59,7 @@ export default function PostsFeed() {
       {/* TODO: show a loading indicator when the posts are loading,
         or else a button to load more posts if not */}
 
-        {data.loading ? <p>Loading...</p> : <button onClick={fetchNext5Posts}>Load more posts...</button>}
+        {feedLoading ? <p>Loading...</p> : <button onClick={fetchNext5Posts}>Load more posts...</button>}
     </div>
   );
 }
