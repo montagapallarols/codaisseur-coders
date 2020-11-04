@@ -1,3 +1,5 @@
+USING REDUX STATE
+
 - Create actions/selectors/reducer.js for /feed [X]
 - reducer.js => create reducer function, specifiy the cases and export it to rootReducer.js
   => Add initial state [X]
@@ -12,3 +14,7 @@
   => two selectors called selectFeedLoading and selectFeedPosts [X]
 
 - In PostsFeed.js replace the useState hook with one or more selector usages [X]
+
+---
+
+FETCHING DATA WITH A THUNK

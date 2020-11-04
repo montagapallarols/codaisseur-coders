@@ -4,9 +4,9 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, postsFetched } from "../store/feed/actions";
 import { selectFeedLoading, selectFeedPosts } from "../store/feed/selectors";
+import { fetchNext5Posts } from "../store/feed/actions";
 
 
-const API_URL = `https://codaisseur-coders-network.herokuapp.com`;
 
 export default function PostsFeed() {
 
@@ -16,22 +16,22 @@ export default function PostsFeed() {
   const feedPosts = useSelector(selectFeedPosts)
  
 
-  async function fetchNext5Posts() {
-    dispatch(setLoading(true));
+//   async function fetchNext5Posts() {
+//     dispatch(setLoading(true));
 
-    const response = await axios.get(`${API_URL}/posts?offset=${feedPosts.length}&limit=5`)
-    console.log("More posts", response.data.rows)
-    const morePosts = response.data.rows
+//     const response = await axios.get(`${API_URL}/posts?offset=${feedPosts.length}&limit=5`)
+//     console.log("More posts", response.data.rows)
+//     const morePosts = response.data.rows
 
 
-    dispatch(postsFetched(morePosts));
-  }
+//     dispatch(postsFetched(morePosts));
+//   }
 
-  useEffect(() => {
-    fetchNext5Posts();
-  }, []);
+useEffect(() => {
+    dispatch(fetchNext5Posts);
+  }, [dispatch]);
 
-  console.log("FEED POSTS.....", feedPosts)
+  
   dispatch(setLoading(false))
 
   return (
@@ -59,7 +59,7 @@ export default function PostsFeed() {
       {/* TODO: show a loading indicator when the posts are loading,
         or else a button to load more posts if not */}
 
-        {feedLoading ? <p>Loading...</p> : <button onClick={fetchNext5Posts}>Load more posts...</button>}
+        {feedLoading ? <p>Loading...</p> : <button onClick={()=> dispatch(fetchNext5Posts)}>Load more posts...</button>}
     </div>
   );
 }
