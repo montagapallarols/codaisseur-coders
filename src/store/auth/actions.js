@@ -40,3 +40,19 @@ export function login(email, password) {
     }
     };
 }
+
+
+export function bootstrapLoginState() { 
+    return async function (dispatch, getState) {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+     
+      const userProfile = await axios.get(`${API_URL}/me`, { 
+        headers: { Authorization: `Bearer ${jwt}` } 
+    })
+      console.log("user profile loaded automatically", userProfile);
+      dispatch(loginToken(jwt, userProfile));
+    } else {
+      console.log("no token stored in localstorage");
+    }
+  }};
