@@ -34,6 +34,7 @@ export function login(email, password) {
 
 
       dispatch(loginToken(token, userProfile))
+      localStorage.setItem("jwt", token)
     } catch(e) {
         console.log(e)
     }
