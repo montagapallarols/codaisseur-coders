@@ -1,6 +1,7 @@
 import axios from "axios";
 const API_URL = `https://codaisseur-coders-network.herokuapp.com`;
 
+
 export function setLoading(loading) {
     return {
       type: "SET_LOADING",
@@ -28,3 +29,4 @@ export function setLoading(loading) {
 
     dispatch(postsFetched(morePosts));
   }
+

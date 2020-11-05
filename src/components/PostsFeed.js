@@ -4,7 +4,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, postsFetched } from "../store/feed/actions";
 import { selectFeedLoading, selectFeedPosts } from "../store/feed/selectors";
-import { fetchNext5Posts } from "../store/feed/actions";
+import { fetchNext5Posts, login } from "../store/feed/actions";
 import { Link } from "react-router-dom";
 
 
@@ -34,6 +34,8 @@ useEffect(() => {
 
   
   dispatch(setLoading(false))
+
+
 
   return (
     <div>
