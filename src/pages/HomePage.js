@@ -4,7 +4,7 @@ import PostsFeed from "../components/PostsFeed";
 export default function HomePage() {
     return (
         <div>
-            <h1>Hi there!</h1>
+            <h1>Codaisseur coders</h1>
             <PostsFeed/>
         </div>
     )

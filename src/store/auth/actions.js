@@ -7,6 +7,10 @@ export function loginToken(token, profile) {
       };
 }
 
+export function logoutSession(){
+    return {type: "LOGOUT_SESSION"}
+}
+
 
 const API_URL = `https://codaisseur-coders-network.herokuapp.com`;
 
@@ -17,10 +21,9 @@ export function login(email, password) {
       // make a POST API request to `/login`
       try {
       const response = await axios.post(`${API_URL}/login`, {
-          email: "kelley@codaisseur.com",
-          password: "abcd",
+          email: email,
+          password: password,
         })
-
         
         console.log("Post Response", response.data);
         const token = response.data.jwt
@@ -51,8 +54,14 @@ export function bootstrapLoginState() {
         headers: { Authorization: `Bearer ${jwt}` } 
     })
       console.log("user profile loaded automatically", userProfile);
-      dispatch(loginToken(jwt, userProfile));
+      dispatch(loginToken(jwt, userProfile.data));
     } else {
       console.log("no token stored in localstorage");
     }
   }};
+
+
+  export function logout(dispatch, getState) {
+    dispatch(logoutSession());
+    localStorage.removeItem("jwt");
+  }

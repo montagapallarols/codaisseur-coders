@@ -12,6 +12,9 @@ const initialState = {
                 accessToken: action.payload.token
             }
         }
+        case "LOGOUT_SESSION": {
+            return initialState
+        }
       default: {
         return state;
       }

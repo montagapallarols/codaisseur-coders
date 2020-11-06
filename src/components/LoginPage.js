@@ -12,7 +12,7 @@ export default function LoginPage() {
     event.preventDefault();
 
     console.log("Login with:", email, password);
-    dispatch(login());
+    dispatch(login(email, password));
     setEmail("")
     setPassword("")
   }
